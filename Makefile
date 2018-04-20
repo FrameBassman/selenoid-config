@@ -4,7 +4,7 @@ start-selenoid:
 		--project-directory=${PWD} \
 		--project-name=selenoid-config \
 		-f deploy/docker-compose.yml \
-		up
+		up -d
 
 stop-selenoid:
 	docker-compose \
