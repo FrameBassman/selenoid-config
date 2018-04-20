@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+    selenoid:
+        container_name: selenoid
+        image: aerokube/selenoid:latest-release
+        network_mode: bridge
+        volumes:
+            - ./config/:/etc/selenoid/:ro 
+            - /var/run/docker.sock:/var/run/docker.sock
+        ports:
+            - "4444:4444"
+    selenoid-ui:
+        container_name: selenoid-ui
+        image: aerokube/selenoid-ui:latest-release
+        network_mode: bridge
+        links:
+            - selenoid
+        ports:
+            - "5052:8080"
+        command: ["--selenoid-uri", "http://selenoid:4444"]
